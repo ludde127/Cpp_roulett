@@ -22,7 +22,7 @@ bool binary_choice(string question, string answ1, string answ2) {
             ok_answ = true;
         }
     }
-    return answ == answ1 ? true : false;
+    return answ == answ1;
 }
 
 int main() {
@@ -31,20 +31,20 @@ int main() {
     int bet;
     bool allowed_selection;
     int balance = 1000;
-    string f_or_n;
     while (play) {
         if (balance < 100) {
             println("Du kan inte spela mer du har bara" + std::to_string(balance));
             println("Du har förlorat...");
             break;
         }
-        allowed_selection = false;
-        while (!allowed_selection) {
+        while (true) {
             println("");
             println("Du har " + std::to_string(balance));
             println("Välj en insats, 100, 300 eller 500 (kr): ");
             cin >> bet;
-            allowed_selection = (bet == 100 || bet == 300 || bet == 500) && bet <= balance;
+            if ((bet == 100 || bet == 300 || bet == 500) && bet <= balance) {
+                break;
+            }
         }
         balance -= bet;
 
