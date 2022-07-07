@@ -70,11 +70,12 @@ int main() {
                 cin >> number;
                 allowed_selection = 1 <= std::stoi(number) && std::stoi(number) <= 36;
             }
-            if (random()==std::stoi(number)) {
+            int _random = random();
+            if (_random==std::stoi(number)) {
                 println("Du vann med rätt gissade siffra!");
                 balance += bet * 11; // Lägg till 11 gånger pengarna för man har dragit insatsen redan.
             } else {
-                println("Du gissade på fel siffra");
+                println("Du gissade på fel siffra rätt siffra var " + std::to_string(_random));
             }
         }
         if (!binary_choice("Vill du spela igen (y/n): ", "y", "n")) break;
