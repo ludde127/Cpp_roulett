@@ -17,6 +17,7 @@ bool binary_choice(string question, string answ1, string answ2) {
     string answ;
     while (!ok_answ) {
         println(question);
+        cin.ignore();
         cin >> answ;
         if (answ == answ1 || answ == answ2) { // Kolla om svaret är ett av de två tillåtna.
             ok_answ = true;
@@ -40,6 +41,7 @@ int main() {
             println("");
             println("Du har " + std::to_string(balance));
             println("Välj en insats, 100, 300 eller 500 (kr): ");
+            cin.ignore();
             cin >> bet;
             if ((bet == 100 || bet == 300 || bet == 500) && bet <= balance) {
                 break;
@@ -47,10 +49,12 @@ int main() {
         }
         balance -= bet; // Dra bort insatsen från 'kontot'
 
-        bool color_bet = binary_choice(("Vill du satsa på en färg eller på en siffra? (f/n)"), "f", "n");
+        bool color_bet = binary_choice(("Vill du satsa på en färg eller på en siffra? (f/n)"),
+                                         "f", "n");
         if (color_bet) {
             // Om man väljer färgs så får man också välja vilken
-            bool color = binary_choice("Vilken färg vill du satsa på? (rod/svart): ", "rod", "svart");
+            bool color = binary_choice("Vilken färg vill du satsa på? (rod/svart): ",
+                                         "rod", "svart");
             if (random()%2==0 && !color || random()%2==1 && color) { // Kolla om jämnheten är rätt för färgen
                 println("Vann med rätt färg");
                 balance += bet*3; // Lägg till 3 gånger pengarna för man har dragit insatsen redan.
@@ -62,6 +66,7 @@ int main() {
             bool allowed_selection = false;
             while (!allowed_selection) { // Loopar tills man har valt en giltig siffra mellan 1 och 36
                 println("Vilken siffra gissar du på?: ");
+                cin.ignore();
                 cin >> number;
                 allowed_selection = 1 <= std::stoi(number) && std::stoi(number) <= 36;
             }
